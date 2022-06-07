@@ -18,7 +18,7 @@ const routes = Router();
 const upload = multer(uploadConfig);
 const uploadBlog = multer(uploadConfigBlog);
 
-routes.get('/users', UserController.index);
+routes.get('/users', authMiddleware, UserController.index);
 routes.get('/users/:id', UserController.show);
 routes.post('/users', UserController.store);
 

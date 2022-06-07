@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 interface TokenPayload {
   id: string;
-  iad: number;
+  iat: number;
   exp: number;
 }
 
@@ -15,10 +15,11 @@ export default function authMiddleware(req:Request, res:Response, next:NextFunct
     return res.sendStatus(401);
   }
 
-  const token = authorization.replace('Bearer', ' ').trim();
+  const token = authorization.replace('Bearer', '').trim();
 
   try {
     const data = jwt.verify(token, 'secret');
+    console.log(data)
     const { id } = data as TokenPayload;
 
     req.userId = id;

@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, BeforeInsert, BeforeUpdate, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 import bcrypt from 'bcryptjs';
 
@@ -17,11 +17,11 @@ export default class User {
   @Column()
   password: string;
 
-  @Column({default: 'p'})
-  status: string;
+  @CreateDateColumn()
+  createdDate: Date;
 
-  @Column({default: 'cliente'})
-  role: string;
+  @UpdateDateColumn()
+  updatedDate: Date;
 
   @Column()
   id_perito: number;

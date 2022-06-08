@@ -25,15 +25,29 @@ class UserController {
 
   async store(req: Request, res: Response) {
     const userRepository = getRepository(User);
-    const { name, email, password, status, role, id_perito } = req.body;
+    const { 
+      name,
+      email, 
+      password, 
+      id_perito,
+      createdDate,
+      updatedDate,
+     } = req.body;
 
     const userExists = await userRepository.findOne({ where: { email } });
 
-    if (userExists) {
+    if (!userExists) {
       return res.sendStatus(409);
     }
 
-    const user = userRepository.create({ name, email, password, status, role, id_perito });
+    const user = userRepository.create({ 
+      name, 
+      email, 
+      password, 
+      id_perito, 
+      createdDate,
+      updatedDate,
+     });
     await userRepository.save(user);
 
     delete user.password;

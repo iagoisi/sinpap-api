@@ -15,21 +15,19 @@ class AuthController {
     
 
     if(!user) {
-      return res.sendStatus(401).json({ error: 'User not found!' });
+      return res.status(401).json({ error: 'User not found!' });
     }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
     // const isValidStatus = await bcrypt.compare(status, user.status);
 
     if(!isValidPassword) {
-      return res.sendStatus(401).json({ error: 'Incorrect password or e-mail' });
+      return res.status(401).json({ error: 'Incorrect password or e-mail' });
     }
 
-    // if(status != "A") {
-      // return res.sendStatus(401);
-      // next();
-    // }
-    const token = jwt.sign({ id: user.email }, 'secret', { expiresIn: '1d' });
+    const token = jwt.sign({ id: user.email }, 'secret', { 
+      subject: user.email,
+      expiresIn: '1d' });
 
     delete user.password;
     

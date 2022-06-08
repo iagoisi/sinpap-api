@@ -29,13 +29,13 @@ export class CreateUsersTable1639154850538 implements MigrationInterface {
                     type: 'varchar',
                 },
                 {
-                    name: 'status',
-                    type: 'varchar',
-                },
-                {
-                    name: "role",
-                    type: 'string',
-                },
+                    name: 'createdDate',
+                    type: 'date',
+                  },
+                  {
+                    name: 'updatedDate',
+                    type: 'date',
+                  },
                 {
                     name: "id_perito",
                     type: 'number',
